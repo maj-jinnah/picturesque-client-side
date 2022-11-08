@@ -7,8 +7,8 @@ const Navbar = () => {
     return (
         <div className="navbar bg-slate-500 px-5 md:px-10">
             <div className="flex-1">
-                <img className='h-14 w-14' src={photo} alt="" />
-                <div className='text-white text-3xl font-semibold'>
+                <img className='h-11 w-11 mr-2' src={photo} alt="" />
+                <div className='text-white text-4xl font-semibold'>
                     <h1>Picturesque</h1>
                 </div>
             </div>
