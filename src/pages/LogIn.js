@@ -1,11 +1,26 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 
 const LogIn = () => {
 
-    const handelSubmit= (event) =>{
+    const { user, googleProviderSignIn } = useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider()
+
+    const handelSubmit = (event) => {
         event.preventDefault()
+    }
+    const handelGoogleSignIn = () => {
+        googleProviderSignIn(googleProvider)
+            .then((result) => {
+                const user = result.user
+                console.log(user)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     return (
@@ -27,7 +42,7 @@ const LogIn = () => {
                             </label>
                             <input type="password" placeholder="password" name='password' className="input input-bordered" />
                             <label className="label">
-                                <p className='text-red-600'>{}</p>
+                                <p className='text-red-600'>{ }</p>
                             </label>
                         </div>
                         <div className="form-control mt-6">
@@ -43,7 +58,7 @@ const LogIn = () => {
                         </div>
 
                         <div className='flex flex-col'>
-                            <button className="btn btn-primary mb-5"><FaGoogle className='text-xl mr-3'></FaGoogle>Login with Google</button>
+                            <button onClick={handelGoogleSignIn} className="btn btn-primary mb-5"><FaGoogle className='text-xl mr-3'></FaGoogle>Login with Google</button>
                             <button className="btn btn-primary"><FaGithub className='text-xl mr-3'></FaGithub> Login with Github</button>
                         </div>
                     </form>
