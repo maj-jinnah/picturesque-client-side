@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -6,14 +6,26 @@ import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 
 const LogIn = () => {
 
-    const { user, googleProviderSignIn } = useContext(AuthContext)
+    const { user, googleProviderSignIn, githubProviderSignIn } = useContext(AuthContext)
+
     const googleProvider = new GoogleAuthProvider()
+    const githubProvider = new GithubAuthProvider()
 
     const handelSubmit = (event) => {
         event.preventDefault()
     }
     const handelGoogleSignIn = () => {
         googleProviderSignIn(googleProvider)
+            .then((result) => {
+                const user = result.user
+                console.log(user)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    const handelGithubSignIn = () => {
+        githubProviderSignIn(githubProvider)
             .then((result) => {
                 const user = result.user
                 console.log(user)
@@ -59,7 +71,7 @@ const LogIn = () => {
 
                         <div className='flex flex-col'>
                             <button onClick={handelGoogleSignIn} className="btn btn-primary mb-5"><FaGoogle className='text-xl mr-3'></FaGoogle>Login with Google</button>
-                            <button className="btn btn-primary"><FaGithub className='text-xl mr-3'></FaGithub> Login with Github</button>
+                            <button onClick={handelGithubSignIn} className="btn btn-primary"><FaGithub className='text-xl mr-3'></FaGithub> Login with Github</button>
                         </div>
                     </form>
 
