@@ -19,6 +19,7 @@ const Navbar = () => {
                     
                     <li><Link to='/blog'>Blogs</Link></li>
                     
+                    <li><Link to='/login'>LogIn</Link></li>
                     {/* {
                         user?.uid ?
                             <li><button >LogOut</button></li> :
