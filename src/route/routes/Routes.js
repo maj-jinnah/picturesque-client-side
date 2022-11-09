@@ -5,6 +5,8 @@ import Blog from '../../pages/Blog';
 import ErrorPage from '../../pages/ErrorPage';
 import LogIn from '../../pages/LogIn';
 import Register from '../../pages/Register';
+import Services from '../../pages/Services';
+import PrivetRoutes from '../PrivetRoutes/PrivetRoutes';
 
 export const routes = createBrowserRouter([
     {
@@ -14,6 +16,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: 'services',
+                element: <PrivetRoutes><Services></Services></PrivetRoutes>
             },
             {
                 path: '/blog',

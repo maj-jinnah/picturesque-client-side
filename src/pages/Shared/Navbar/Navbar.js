@@ -26,7 +26,7 @@ const Navbar = () => {
                 <ul className='flex gap-8 p-2 text-white text-lg hidden md:flex'>
 
                     <li><Link to='/'>Home</Link></li>
-
+                    <li><Link to='/services'>Services</Link></li>
                     <li><Link to='/blog'>Blogs</Link></li>
                     {
                         user?.uid ?
@@ -56,7 +56,7 @@ const Navbar = () => {
                     <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                         {<p>{user?.displayName}</p>}
                         <li><Link to='/'>Home</Link></li>
-
+                        <li><Link to='/services'>Services</Link></li>
                         <li><Link to='/blog'>Blogs</Link></li>
 
                         {
