@@ -19,18 +19,18 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        signInUser(email,password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
+        signInUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
                 form.reset();
                 setError('');
                 toast.success('Successfully LogIn')
-        })
-        .catch(error =>{
-            console.error(error);
-            setError(error);
-        })
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error);
+            })
     }
     const handelGoogleSignIn = () => {
         googleProviderSignIn(googleProvider)

@@ -6,7 +6,7 @@ import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 const Register = () => {
 
     const [error, setError] = useState('')
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const handelSubmit = (event) => {
         event.preventDefault();
@@ -15,13 +15,14 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
                 setError('');
+                handelUpdateUserProfile(name, photoURL)
                 toast.success('Registered successfully!')
             })
             .catch(error => {
@@ -29,6 +30,16 @@ const Register = () => {
                 setError(error.message);
             })
 
+    }
+
+    const handelUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch((error) => console.error(error))
     }
 
     return (
