@@ -4,12 +4,25 @@ import weeding from '../../assets/home img/weeding.jpg'
 import animal from '../../assets/home img/animal.jpg'
 import Gallery from './Gallery';
 import Support from './Support';
+import { Link, useLoaderData } from 'react-router-dom';
+import ServiceCard from '../ServiceCard';
 
 const Home = () => {
+    const services = useLoaderData()
     return (
         <div>
             <Carousel></Carousel>
             <h1 className='text-center font-bold text-3xl mt-5'>Services we are providing right now!</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-10 mx-5'>
+                {
+                    services.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
+                }
+            </div>
+            <div className='text-center'>
+                <Link to='/services'>
+                    <button className="btn btn-primary px-7 text-base mb-5">See More</button>
+                </Link>
+            </div>
             <div className="hero  bg-base-200 mt-5 pt-3">
                 <div className="hero-content flex-col md:flex-row">
                     <img src={weeding} className="w-2/4 rounded-lg shadow-2xl" alt='' />
