@@ -27,6 +27,14 @@ const Navbar = () => {
 
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/services'>Services</Link></li>
+                    {
+                        user?.uid ?
+                            <>
+                                <li><Link to='/myreviews'>My reviews</Link></li>
+                                <li><Link to='/addservice'>Add service</Link></li>
+                            </> :
+                            <></>
+                    }
                     <li><Link to='/blog'>Blogs</Link></li>
                     {
                         user?.uid ?
@@ -46,7 +54,7 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end md:hidden">
                     <label tabIndex={0} className="btn btn-ghost ">
                         <div className="w-10 rounded-full">
-                            
+
                             {user?.photoURL ?
                                 <img className='rounded-lg' style={{ hight: '40px', width: '40px' }} src={user.photoURL} alt='' title={user?.displayName}></img> :
                                 <FaBars className='text-2xl mx-auto' />
@@ -57,6 +65,14 @@ const Navbar = () => {
                         {<p>{user?.displayName}</p>}
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/services'>Services</Link></li>
+                        {
+                            user?.uid ?
+                                <>
+                                    <li><Link to='/myreviews'>My reviews</Link></li>
+                                    <li><Link to='/addservice'>Add service</Link></li>
+                                </> :
+                                <></>
+                        }
                         <li><Link to='/blog'>Blogs</Link></li>
 
                         {
