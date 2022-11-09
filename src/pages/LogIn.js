@@ -1,18 +1,36 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 
 const LogIn = () => {
 
-    const { user, googleProviderSignIn, githubProviderSignIn } = useContext(AuthContext)
+    const [error, setError] = useState('')
+    const { googleProviderSignIn, githubProviderSignIn, signInUser } = useContext(AuthContext)
 
     const googleProvider = new GoogleAuthProvider()
     const githubProvider = new GithubAuthProvider()
 
     const handelSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signInUser(email,password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+                form.reset();
+                setError('');
+                toast.success('Successfully LogIn')
+        })
+        .catch(error =>{
+            console.error(error);
+            setError(error);
+        })
     }
     const handelGoogleSignIn = () => {
         googleProviderSignIn(googleProvider)
@@ -54,7 +72,7 @@ const LogIn = () => {
                             </label>
                             <input type="password" placeholder="password" name='password' className="input input-bordered" />
                             <label className="label">
-                                <p className='text-red-600'>{ }</p>
+                                <p className='text-red-600'>{error}</p>
                             </label>
                         </div>
                         <div className="form-control mt-6">
