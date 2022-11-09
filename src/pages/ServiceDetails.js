@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { json, Link, useLoaderData } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const ServiceDetails = () => {
@@ -14,8 +15,8 @@ const ServiceDetails = () => {
         event.preventDefault();
         const form = event.target;
         const message = form.review.value;
-        
-        const review ={
+
+        const review = {
             service: _id,
             serviceName: name,
             customer: user?.displayName,
@@ -23,6 +24,29 @@ const ServiceDetails = () => {
             email: user?.email,
             message
         }
+        if (!user?.uid) {
+            toast.error('Please login to add a review');
+            return;
+        }
+        else {
+            fetch('http://localhost:5000/reviews', {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(review)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.acknowledged) {
+                        toast.success("Your review successfully submitted!")
+                        form.reset();
+                    }
+                })
+                .catch(error => console.log(error))
+        }
+
     }
 
     return (
@@ -41,7 +65,7 @@ const ServiceDetails = () => {
 
             <div className='mx-auto text-center'>
                 <form onSubmit={handelSubmit} className="flex items-center justify-center">
-                    <textarea name="review" className="textarea textarea-success w-2/4" placeholder="Please, write your review here."></textarea>
+                    <textarea name="review" className="textarea textarea-success w-2/4" placeholder="Please, write your review here." required></textarea>
                     <input className='btn btn-primary ml-5' type="submit" value="Submit Review" />
                 </form>
             </div>
