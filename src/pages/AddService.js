@@ -21,7 +21,7 @@ const AddService = () => {
             description
         }
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://picturesque-server-side.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

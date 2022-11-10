@@ -6,7 +6,7 @@ const ReviewRow = ({ review, handelDelete, handelUpdate, getNrwReview }) => {
     const [serviceData, setServiceData] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`https://picturesque-server-side.vercel.app/services/${service}`)
             .then(res => res.json())
             .then(data => setServiceData(data))
     }, [service])
@@ -33,7 +33,7 @@ const ReviewRow = ({ review, handelDelete, handelUpdate, getNrwReview }) => {
                     <h3 className="font-bold text-lg">Please write yur new review!</h3>
                     <textarea name="newReview" className="textarea textarea-success w-3/4" placeholder="Please, write your review here." required></textarea>
                     <div className="modal-action">
-                        <button onClick={()=>handelUpdate(_id)}><label htmlFor="my-modal" className="btn btn-ghost">Submit</label></button>
+                        <button onClick={() => handelUpdate(_id)}><label htmlFor="my-modal" className="btn btn-ghost">Submit</label></button>
                     </div>
                 </div>
             </form>

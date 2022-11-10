@@ -33,7 +33,7 @@ const ServiceDetails = () => {
             return;
         }
         else {
-            fetch('http://localhost:5000/reviews', {
+            fetch('https://picturesque-server-side.vercel.app/reviews', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -55,7 +55,7 @@ const ServiceDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review?service=${_id}`)
+        fetch(`https://picturesque-server-side.vercel.app/review?service=${_id}`)
             .then(res => res.json())
             .then(data => {
                 setPreReviews(data)

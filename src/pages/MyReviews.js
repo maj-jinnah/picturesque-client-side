@@ -11,7 +11,7 @@ const MyReviews = () => {
     const [updateReview, setUpdateReview] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+        fetch(`https://picturesque-server-side.vercel.app/reviews?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
@@ -19,7 +19,7 @@ const MyReviews = () => {
     const handelDelete = (id) => {
         const proceed = window.confirm("Are you sure you want to delete this review?")
         if (proceed) {
-            fetch(`http://localhost:5000/reviews/${id}`, {
+            fetch(`https://picturesque-server-side.vercel.app/reviews/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -46,7 +46,7 @@ const MyReviews = () => {
 
     const handelUpdate = (id) => {
         console.log(updateReview)
-        fetch(`http://localhost:5000/reviews/${id}`, {
+        fetch(`https://picturesque-server-side.vercel.app/reviews/${id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json'
