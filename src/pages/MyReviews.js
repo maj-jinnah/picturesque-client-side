@@ -7,6 +7,7 @@ const MyReviews = () => {
 
     const { user } = useContext(AuthContext)
     const [reviews, setReviews] = useState([])
+    const [updateReview, setUpdateReview] = useState('')
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
@@ -23,7 +24,7 @@ const MyReviews = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    if(data.deletedCount > 0){
+                    if (data.deletedCount > 0) {
                         toast.success("Successfully deleted!")
                         const remaining = reviews.filter(rev => rev._id !== id)
                         setReviews(remaining)
@@ -32,35 +33,50 @@ const MyReviews = () => {
         }
 
     }
+    const getNrwReview = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const newReview = form.newReview.value;
+        // console.log(newReview)
+        setUpdateReview(newReview)
+        console.log(updateReview)
+        form.reset()
+    }
+
+    const handelUpdate = (id) => {
+        console.log(updateReview)
+        fetch(`http://localhost:5000/reviews/${id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updateReview)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    toast.success("Your review successfully updated!")
+
+                    const remaining = reviews.filter(rev => rev._id !== id);
+                    const changing = reviews.find(rev => rev._id === id);
+                    const currentRev = [changing, ...remaining];
+                    setReviews(currentRev);
+
+                }
+            })
+            .catch(error => console.log(error))
+    }
 
     return (
         <div>
             <h1 className='text-3xl my-5 font-semibold text-center'>You Have {reviews.length} reviews</h1>
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <h1 className='text-red-400 text-base'>Delete</h1>
-                                </label>
-                            </th>
-                            <th>Service Name</th>
-                            <th>Review</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {
-                            reviews.map(review => <ReviewRow key={review._id} review={review} handelDelete={handelDelete}></ReviewRow>)
-                        }
-
-                    </tbody>
-
-                </table>
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {
+                    reviews.map(review => <ReviewRow
+                        key={review._id} review={review} handelDelete={handelDelete} handelUpdate={handelUpdate} getNrwReview={getNrwReview}
+                    ></ReviewRow>)
+                }
             </div>
         </div>
     );
