@@ -14,6 +14,7 @@ const ReviewRow = ({ review, handelDelete }) => {
 
 
     return (
+
         <tr>
             <th>
                 <label>
@@ -39,9 +40,19 @@ const ReviewRow = ({ review, handelDelete }) => {
             <td>
                 {message}
             </td>
-            <td>Purple</td>
+            <td></td>
+            <input type="checkbox" id="my-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg mb-2">Please write down your review!</h3>
+                    <textarea name="review" className="textarea textarea-success w-3/4" placeholder="write your review here." required></textarea>
+                    <div className="modal-action">
+                        <button><label htmlFor="my-modal" className="btn btn-ghost">Submit!</label></button>
+                    </div>
+                </div>
+            </div>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button><label htmlFor="my-modal" className="btn btn-ghost btn-xs">Edit Review</label></button>
             </th>
         </tr>
     );
