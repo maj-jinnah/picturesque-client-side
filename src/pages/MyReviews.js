@@ -7,7 +7,7 @@ const MyReviews = () => {
 
     const { user } = useContext(AuthContext)
     const [reviews, setReviews] = useState([])
-    const [updateReview, setUpdateReview] = useState('')
+    const [updateReview, setUpdateReview] = useState({})
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
