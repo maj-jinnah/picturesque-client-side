@@ -5,6 +5,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 import toast from 'react-hot-toast';
 import ShowReview from './ShowReview';
+import { Helmet } from 'react-helmet-async';
 
 
 const ServiceDetails = () => {
@@ -65,6 +66,9 @@ const ServiceDetails = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Service Details - Picturesque</title>
+            </Helmet>
             <h1 className='text-4xl font-bold text-center mt-5'>{name}</h1>
             <PhotoProvider>
                 <PhotoView src={image}>

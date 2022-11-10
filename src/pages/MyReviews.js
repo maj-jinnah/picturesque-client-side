@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 import ReviewRow from './ReviewRow';
@@ -70,6 +71,9 @@ const MyReviews = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Reviews - Picturesque</title>
+            </Helmet>
             <div>
                 {
                     (reviews.length === 0) ?

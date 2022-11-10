@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { json } from 'react-router-dom';
 
@@ -40,6 +41,9 @@ const AddService = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Add Service - Picturesque</title>
+            </Helmet>
             <h1 className='text-center text-3xl font-semibold my-5'>Want to add a new service? Just fill the form bellow!</h1>
 
             <form onSubmit={handelSubmit}>

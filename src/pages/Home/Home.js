@@ -6,11 +6,15 @@ import Gallery from './Gallery';
 import Support from './Support';
 import { Link, useLoaderData } from 'react-router-dom';
 import ServiceCard from '../ServiceCard';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     const services = useLoaderData()
     return (
         <div>
+            <Helmet>
+                <title>Picturesque</title>
+            </Helmet>
             <Carousel></Carousel>
             <h1 className='text-center font-bold text-3xl mt-5'>Services we are providing right now!</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-10 mx-5'>

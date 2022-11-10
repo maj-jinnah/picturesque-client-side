@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
     return (
         <div className='my-8 mx-8'>
+            <Helmet>
+                <title>Blogs - Picturesque</title>
+            </Helmet>
             <div className='mb-8'>
                 <h1 className='text-2xl font-bold'>Question 1:  Difference between SQL and NoSQL?</h1>
                 <p><span className='font-bold'> Answer:</span> Structured Query language "SQL" pronounced as “S-Q-L” or sometimes as "See-Quel" is the standard language for dealing with Relational Databases. A relational database defines relationships in the form of tables. SQL programming can be effectively used to insert, search, update, delete database records. That doesn't mean SQL cannot do things beyond that. It can do a lot of things including, but not limited to, optimizing and maintenance of databases. <br/>

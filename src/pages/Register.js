@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
@@ -44,6 +45,9 @@ const Register = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
+            <Helmet>
+                <title>Register - Picturesque</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
 
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
