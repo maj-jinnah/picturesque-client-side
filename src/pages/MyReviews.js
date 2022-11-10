@@ -70,12 +70,20 @@ const MyReviews = () => {
 
     return (
         <div>
-            <h1 className='text-3xl my-5 font-semibold text-center'>You Have {reviews.length} reviews</h1>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div>
                 {
-                    reviews.map(review => <ReviewRow
-                        key={review._id} review={review} handelDelete={handelDelete} handelUpdate={handelUpdate} getNrwReview={getNrwReview}
-                    ></ReviewRow>)
+                    (reviews.length === 0) ?
+                        <h1 className='text-3xl font-semibold text-center my-36'>No reviews were added</h1> :
+                        <div>
+                            <h1 className='text-3xl my-5 font-semibold text-center'>You Have {reviews.length} reviews</h1>
+                            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                {
+                                    reviews.map(review => <ReviewRow
+                                        key={review._id} review={review} handelDelete={handelDelete} handelUpdate={handelUpdate} getNrwReview={getNrwReview}
+                                    ></ReviewRow>)
+                                }
+                            </div>
+                        </div>
                 }
             </div>
         </div>
