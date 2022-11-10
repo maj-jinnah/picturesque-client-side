@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { json, Link, useLoaderData } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { AuthContext } from '../contexts/AuthContext/AuthProvider';
 import toast from 'react-hot-toast';
+import ShowReview from './ShowReview';
 
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext)
     const service = useLoaderData()
+    const [preReviews, setPreReviews] = useState([])
+
     const { _id, name, price, description, image } = service;
 
     const handelSubmit = (event) => {
@@ -49,6 +52,17 @@ const ServiceDetails = () => {
 
     }
 
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/review?service=${_id}`)
+            .then(res => res.json())
+            .then(data => {
+                setPreReviews(data)
+            })
+    }, [_id])
+
+
+
     return (
         <div>
             <h1 className='text-4xl font-bold text-center mt-5'>{name}</h1>
@@ -61,6 +75,13 @@ const ServiceDetails = () => {
             <div className='flex justify-evenly my-8'>
                 <h1 className='text-3xl font-semibold'>{price}</h1>
                 <h1 className='text-3xl font-semibold'>Reviews</h1>
+            </div>
+
+            <div>
+                <h1 className='text-xl font-semibold text-center my-3'>We have {preReviews.length} reviews right now in this service.</h1>
+                {
+                    preReviews.map(rev => <ShowReview key={rev._id} rev={rev}></ShowReview>)
+                }
             </div>
 
             <div className='mx-auto text-center'>
